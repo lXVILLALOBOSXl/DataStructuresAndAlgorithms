@@ -268,6 +268,8 @@ public class Sort {
         int[] temp = new int[numItems];
 
         for(int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
+            //it first search where (in what position) in the count array is every digit of the every position in the array
+            //and when the number is found, that index will be the correct position in the new array order and we reduce one because we've already found it
             temp[--countArray[getDigit(position, array[tempIndex], radix)]] = array[tempIndex];
         }
 
