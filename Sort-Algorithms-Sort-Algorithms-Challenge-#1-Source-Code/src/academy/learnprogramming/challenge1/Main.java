@@ -2,6 +2,9 @@ package academy.learnprogramming.challenge1;
 
 public class Main {
 
+    /**
+     * Make mergeSort sorting on a descending order
+     */
     public static void main(String[] args) {
         int[] intArray = { 20, 35, -15, 7, 55, 1, -22 };
 
@@ -26,6 +29,10 @@ public class Main {
 
     public static void merge(int[] input, int start, int mid, int end) {
 
+
+        //it has to change optimitation comparision from <= to >=
+        //it will be correct when the left side will be greater than
+        //the right side
         if (input[mid - 1] >= input[mid]) {
             return;
         }
@@ -36,6 +43,9 @@ public class Main {
 
         int[] temp = new int[end - start];
         while (i < mid && j < end) {
+            //it has to change comparision saving auxiliar from <= to >=
+            //When the number in the left or the right side is greater it has to
+            //save on auxiliar array on the left part
             temp[tempIndex++] = input[i] >= input[j] ? input[i++] : input[j++];
         }
 
