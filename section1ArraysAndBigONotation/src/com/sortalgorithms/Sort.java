@@ -1,5 +1,7 @@
 package com.sortalgorithms;
 
+import java.util.*;
+
 public class Sort {
 
     /**
@@ -8,14 +10,14 @@ public class Sort {
      * in place algorithm
      * O (n2)
      * stable algortihm
-     * @param array
+     * @param input
      */
-    public static void bubble(int[] array){
+    public static void bubble(int[] input){
 
-        for (int lastUnsortedIndex = array.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--){
+        for (int lastUnsortedIndex = input.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--){
             for (int i = 0; i < lastUnsortedIndex; i++) {
-                if(array[i] > array[i+1]){
-                    Sort.swap(array, i, i+1);
+                if(input[i] > input[i+1]){
+                    Sort.swap(input, i, i+1);
                 }
             }
         }
@@ -28,22 +30,22 @@ public class Sort {
      * in place algorithm
      * O (n2)
      * Unstable algorithm
-     * @param array
+     * @param input
      */
-    public static void selection(int[] array){
+    public static void selection(int[] input){
 
-        for (int lastUnsortedIndex = array.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--){
+        for (int lastUnsortedIndex = input.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--){
 
             int largest = 0;
 
             for (int i = 1; i <= lastUnsortedIndex; i++) {
 
-                if(array[i] > array[largest]){
+                if(input[i] > input[largest]){
                     largest = i;
                 }
             }
 
-            Sort.swap(array, largest, lastUnsortedIndex);
+            Sort.swap(input, largest, lastUnsortedIndex);
         }
 
     }
@@ -55,23 +57,23 @@ public class Sort {
      * in place algorithm
      * O (n2)
      * Stable algorithm
-     * @param array
+     * @param input
      */
-    public static void insertion(int[] array) {
+    public static void insertion(int[] input) {
 
-        for(int firstUnsortedIndex = 1; firstUnsortedIndex < array.length; firstUnsortedIndex++){
+        for(int firstUnsortedIndex = 1; firstUnsortedIndex < input.length; firstUnsortedIndex++){
 
-            int newElement = array[firstUnsortedIndex];
+            int newElement = input[firstUnsortedIndex];
 
             int i;
 
-            for(i = firstUnsortedIndex; i > 0 && array[i - 1] > newElement; i--){
+            for(i = firstUnsortedIndex; i > 0 && input[i - 1] > newElement; i--){
 
-                array[i] = array[i - 1];
+                input[i] = input[i - 1];
 
             }
 
-            array[i] = newElement;
+            input[i] = newElement;
         }
 
 
@@ -84,26 +86,26 @@ public class Sort {
      * In place algorithm
      * O (n2) - In worst case but performs better than insertion sort in majority cases
      * Unstable algorithm
-     * @param array
+     * @param input
      */
-    public static void shell(int[] array){
+    public static void shell(int[] input){
 
-        for(int gap = array.length / 2; gap > 0; gap /= 2){
+        for(int gap = input.length / 2; gap > 0; gap /= 2){
 
-            for (int i = gap; i < array.length; i++) {
+            for (int i = gap; i < input.length; i++) {
 
-                int newElement = array[i];
+                int newElement = input[i];
 
                 int j = i;
 
-                while(j >= gap && array[j - gap] >  newElement){
+                while(j >= gap && input[j - gap] >  newElement){
 
-                    array[j] = array[j - gap];
+                    input[j] = input[j - gap];
                     j -= gap;
 
                 }
 
-                array[j] = newElement;
+                input[j] = newElement;
 
             }
 
@@ -117,20 +119,20 @@ public class Sort {
      * Not in place algorthm
      * O (nlogn) base 2
      * Stable algortihm
-     * @param array
+     * @param input
      * @param start
      * @param end
      */
-    public static void merge(int[] array, int start, int end){
+    public static void merge(int[] input, int start, int end){
 
         if(end - start < 2){
             return;
         }
 
         int mid = (start + end) / 2;
-        merge(array, start, mid);
-        merge(array, mid, end);
-        mergeSort(array, start, mid, end);
+        merge(input, start, mid);
+        merge(input, mid, end);
+        mergeSort(input, start, mid, end);
     }
 
     private static void mergeSort(int[] array, int start, int mid, int end) {
@@ -160,41 +162,41 @@ public class Sort {
      * In-place algorithm
      * O(nlogn) base 2, in the worst cacse its complexity will be O(n2)
      * Unstable algorithm
-     * @param array
+     * @param input
      */
-    public static void quick(int[] array, int start, int end){
+    public static void quick(int[] input, int start, int end){
 
         if(end - start < 2){
             return;
         }
 
-        int pivotIndex = partition(array, start, end);
-        quick(array, start, pivotIndex);
-        quick(array, pivotIndex + 1, end);
+        int pivotIndex = partition(input, start, end);
+        quick(input, start, pivotIndex);
+        quick(input, pivotIndex + 1, end);
 
     }
 
-    private static int partition(int[] array, int start, int end){
+    private static int partition(int[] input, int start, int end){
 
-        int pivot = array[start];
+        int pivot = input[start];
         int i = start;
         int j = end;
 
         while (i < j){
 
-            while (i < j && array[--j] >= pivot);
+            while (i < j && input[--j] >= pivot);
             if(i < j){
-                array[i] = array[j];
+                input[i] = input[j];
             }
 
-            while (i < j && array[++i] <= pivot);
+            while (i < j && input[++i] <= pivot);
             if(i < j){
-                array[j] = array[i];
+                input[j] = input[i];
             }
 
         }
 
-        array[j] = pivot;
+        input[j] = pivot;
         return j;
 
     }
@@ -208,15 +210,15 @@ public class Sort {
      * Not in-place algotithm
      * O (n)
      * stable algorithm with extra steps
-     * @param array
+     * @param input
      */
-    public static void counting(int[] array, int min, int max){
+    public static void counting(int[] input, int min, int max){
 
         int[] countingArray = new int[(max - min) + 1];
 
-        for (int i = 0; i < array.length; i++){
+        for (int i = 0; i < input.length; i++){
 
-            countingArray[array[i] - min]++;
+            countingArray[input[i] - min]++;
         }
 
         int j = 0;
@@ -224,7 +226,7 @@ public class Sort {
         for (int i = min; i <= max; i++) {
 
             while (countingArray[i - min] > 0){
-                array[j++] = i;
+                input[j++] = i;
                 countingArray[i - min]--;
             }
         }
@@ -240,23 +242,23 @@ public class Sort {
      * with the same position to other position in the array, for example imagine that ypu have 1234 and 5678, radix sdtarts comparin unitys, and then
      * tens, cents, etc. but you have to make it stable, you have tou use counting sort to take an order, for example if you have
      * the same number position in 2 different contents (1234 5674 - 4 repeats) you have to count how many numers follow it and then return int by its count
-     * @param array
+     * @param input
      * @param radix
      * @param width
      */
-    public static void radix(int[] array, int radix, int width){
+    public static void radix(int[] input, int radix, int width){
         for (int i = 0; i < width; i++) {
-            radixSingleSort(array, i, radix);
+            radixSingleSort(input, i, radix);
         }
     }
 
-    private static void radixSingleSort(int[] array, int position, int radix) {
+    private static void radixSingleSort(int[] input, int position, int radix) {
 
-        int numItems = array.length;
+        int numItems = input.length;
 
         int[] countArray = new int[radix];
 
-        for (int value: array){
+        for (int value: input){
             countArray[getDigit(position, value, radix)]++;
         }
 
@@ -270,28 +272,56 @@ public class Sort {
         for(int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
             //it first search where (in what position) in the count array is every digit of the every position in the array
             //and when the number is found, that index will be the correct position in the new array order and we reduce one because we've already found it
-            temp[--countArray[getDigit(position, array[tempIndex], radix)]] = array[tempIndex];
+            temp[--countArray[getDigit(position, input[tempIndex], radix)]] = input[tempIndex];
         }
 
         for(int tempIndex = 0; tempIndex < numItems; tempIndex++){
-            array[tempIndex] = temp[tempIndex];
+            input[tempIndex] = temp[tempIndex];
         }
 
+    }
+
+    public static void bucket(int[] input) {
+        List<Integer>[] buckets = new List[10];
+
+        for (int i = 0; i < buckets.length; i++) {
+            buckets[i] = new LinkedList<>();
+        }
+
+        for (int i = 0; i < input.length; i++) {
+            buckets[hash(input[i])].add(input[i]);
+        }
+
+        for (List bucket : buckets) {
+            Collections.sort(bucket);
+        }
+
+        int j = 0;
+        for (int i = 0; i < buckets.length; i++) {
+            for (int value : buckets[i]) {
+                input[j++] = value;
+            }
+        }
+
+    }
+
+    private static int hash(int value) {
+        return value / (int) 10;
     }
 
     private static int getDigit(int position, int value, int radix) {
         return value / (int) Math.pow(radix, position) % radix;
     }
 
-    private static void swap(int[] array, int i, int j){
+    private static void swap(int[] input, int i, int j){
 
         if(i == j){
             return;
         }
 
-        int auxiliar = array[i];
-        array[i] = array[j];
-        array[j] = auxiliar;
+        int auxiliar = input[i];
+        input[i] = input[j];
+        input[j] = auxiliar;
     }
 
 }

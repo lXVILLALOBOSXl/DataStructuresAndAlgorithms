@@ -7,7 +7,8 @@ public class Test {
         //int[] arrayToTest = new int[]{ 20, 23, 24, 21};
         //int[] arrayToTest = new int[]{ 20, 35, -15, 7, 55, 1, -22 };
         //int[] arrayToTest = new int[]{ 2, 5, 9, 8, 2, 8, 7, 10, 4, 3 };
-        int[] arrayToTest = new int[]{ 4725, 4586, 1330, 8792, 1594, 5729 };
+        //int[] arrayToTest = new int[]{ 4725, 4586, 1330, 8792, 1594, 5729 };
+        int[] arrayToTest = new int[]{ 54, 46, 83, 66, 95, 92, 43 };
         System.out.println("Unsorted numbers: ");
         Test.printArray(arrayToTest);
         //System.out.println("BubbleSort: ");
@@ -24,8 +25,10 @@ public class Test {
         //Sort.quick(arrayToTest, 0, arrayToTest.length);
         //System.out.println("CountingSort: ");
         //Sort.counting(arrayToTest, 1, 10);
-        System.out.println("RadixSort: ");
-        Sort.radix(arrayToTest, 10, 4);
+        //System.out.println("RadixSort: ");
+        //Sort.radix(arrayToTest, 10, 4);
+        System.out.println("BucketSort: ");
+        Sort.bucket(arrayToTest);
         Test.printArray(arrayToTest);
 
     }
